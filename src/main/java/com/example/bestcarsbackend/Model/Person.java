@@ -1,9 +1,11 @@
 package com.example.bestcarsbackend.Model;
 
+import com.example.bestcarsbackend.Enum.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 
@@ -13,6 +15,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "person_table")
+@Component
 public class Person {
     @Id
     @SequenceGenerator(
@@ -24,7 +27,7 @@ public class Person {
             generator = "user_sequence",
             strategy = GenerationType.SEQUENCE
     )
-    @Column(name = "person_id",nullable = false, updatable = false)
+    @Column(name = "person_id")
     private Long id;
     @Column(name = "person_username")
     private String username;
@@ -39,4 +42,8 @@ public class Person {
     @Column(nullable = false, updatable = false)
     private String personCode;
     private String imageUrl;
+    private String phoneNumber;
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.USER;
+
 }
